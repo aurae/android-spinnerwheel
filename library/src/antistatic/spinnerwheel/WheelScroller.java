@@ -90,6 +90,7 @@ public abstract class WheelScroller {
     protected Scroller scroller;
     private int lastScrollPosition;
     private float lastTouchedPosition;
+    private float velocityFactor = 1f;
     private boolean isScrollingPerformed;
 
     /**
@@ -107,7 +108,7 @@ public abstract class WheelScroller {
 
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 lastScrollPosition = 0;
-                scrollerFling(lastScrollPosition, (int) velocityX, (int) velocityY);
+                scrollerFling(lastScrollPosition, (int) (velocityX * velocityFactor), (int) (velocityY * velocityFactor));
                 setNextMessage(MESSAGE_SCROLL);
                 return true;
             }
@@ -124,7 +125,15 @@ public abstract class WheelScroller {
     }
     
     /**
-     * Set the the specified scrolling interpolator
+     * Set the fling velocity factor to be applied. Default value is 1f
+     * @param factor the velocity factor to apply to consecutive flings
+     */
+    public void setVelocityFactor(float factor) {
+    	velocityFactor = factor;
+    }
+    
+    /**
+     * Set the specified scrolling interpolator
      * @param interpolator the interpolator
      */
     public void setInterpolator(Interpolator interpolator) {

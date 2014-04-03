@@ -538,6 +538,15 @@ public abstract class AbstractWheel extends View {
     public int getCurrentItem() {
         return mCurrentItemIdx;
     }
+    
+    /**
+     * Sets the velocity factor for the scroller.
+     * Be wary of setting 0.0f here, as it hinders scrolling altogether.
+     * @param factor the scrolling factor to set
+     */
+    public void setScrollVelocityFactor(float factor) {
+    	mScroller.setVelocityFactor(factor);
+    }
 
     /**
      * Sets the current item. Does nothing when index is wrong.
