@@ -12,6 +12,7 @@
         <attr name="itemsDimmedAlpha" format="integer" />
         <attr name="isCyclic" format="boolean" />
         <attr name="itemMargins" format="dimension" />
+        <attr name="scrollVelocityFactor" format="float" />
     </declare-styleable>
     <declare-styleable name="WheelVerticalView">
         <attr name="selectionDividerHeight" format="dimension" />

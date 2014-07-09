@@ -74,6 +74,8 @@ public abstract class AbstractWheel extends View {
     protected boolean mIsAllVisible;
 
     protected boolean mIsCyclic;
+    
+    protected float mScrollVelocityFactor;
 
     // Scrolling
     protected WheelScroller mScroller;
@@ -146,6 +148,7 @@ public abstract class AbstractWheel extends View {
         mIsAllVisible = a.getBoolean(R.styleable.AbstractWheelView_isAllVisible, false);
         mIsCyclic = a.getBoolean(R.styleable.AbstractWheelView_isCyclic, DEF_IS_CYCLIC);
         mItemMargins = a.getDimensionPixelSize(R.styleable.AbstractWheelView_itemMargins, 0);
+        mScrollVelocityFactor = a.getFloat(R.styleable.AbstractWheelView_scrollVelocityFactor, 0f);
 
         a.recycle();
     }
@@ -217,6 +220,7 @@ public abstract class AbstractWheel extends View {
                 }
             }
         });
+        mScroller.setVelocityFactor(mScrollVelocityFactor);
     }
 
     @Override
@@ -555,6 +559,7 @@ public abstract class AbstractWheel extends View {
      * @param factor the scrolling factor to set
      */
     public void setScrollVelocityFactor(float factor) {
+    	this.mScrollVelocityFactor = factor;
     	mScroller.setVelocityFactor(factor);
     }
 
