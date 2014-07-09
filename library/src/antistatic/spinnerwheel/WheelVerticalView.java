@@ -75,7 +75,7 @@ public class WheelVerticalView extends AbstractWheelView {
      * @param attrs A collection of attributes.
      */
     public WheelVerticalView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.abstractWheelViewStyle);
+        this(context, attrs, 0);
     }
 
     /**
@@ -177,12 +177,12 @@ public class WheelVerticalView extends AbstractWheelView {
     @Override
     protected int getItemDimension() {
         if (mItemHeight != 0) {
-            return mItemHeight;
+            return mItemHeight + mItemMargins;
         }
 
         if (mItemsLayout != null && mItemsLayout.getChildAt(0) != null) {
             mItemHeight = mItemsLayout.getChildAt(0).getMeasuredHeight();
-            return mItemHeight;
+            return mItemHeight + mItemMargins;
         }
 
         return getBaseDimension() / mVisibleItems;

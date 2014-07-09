@@ -24,20 +24,21 @@
 
 package antistatic.spinnerwheel;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import antistatic.spinnerwheel.adapters.WheelViewAdapter;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Abstract spinner spinnerwheel view.
@@ -81,6 +82,9 @@ public abstract class AbstractWheel extends View {
 
     // Items layout
     protected LinearLayout mItemsLayout;
+    
+    // Margins inbetween each item
+    protected int mItemMargins;
 
     // The number of first item in layout
     protected int mFirstItemIdx;
@@ -141,6 +145,7 @@ public abstract class AbstractWheel extends View {
         mVisibleItems = a.getInt(R.styleable.AbstractWheelView_visibleItems, DEF_VISIBLE_ITEMS);
         mIsAllVisible = a.getBoolean(R.styleable.AbstractWheelView_isAllVisible, false);
         mIsCyclic = a.getBoolean(R.styleable.AbstractWheelView_isCyclic, DEF_IS_CYCLIC);
+        mItemMargins = a.getDimensionPixelSize(R.styleable.AbstractWheelView_itemMargins, 0);
 
         a.recycle();
     }
@@ -437,6 +442,11 @@ public abstract class AbstractWheel extends View {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    	if (isInEditMode()) {
+    		super.onLayout(changed, l, t, r, b);
+    		return;
+    	}
+    	
         if (changed) {
             int w = r - l;
             int h = b - t;
@@ -818,11 +828,18 @@ public abstract class AbstractWheel extends View {
     private boolean addItemView(int index, boolean first) {
         View view = getItemView(index);
         if (view != null) {
+        	
             if (first) {
                 mItemsLayout.addView(view, 0);
             } else {
                 mItemsLayout.addView(view);
             }
+            
+            // Apply spacing
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams(); 
+            lp.rightMargin = mItemMargins / 2;
+            lp.leftMargin = mItemMargins / 2;
+            view.setLayoutParams(lp);
             return true;
         }
         return false;
