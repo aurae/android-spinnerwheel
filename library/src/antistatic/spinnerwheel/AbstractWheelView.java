@@ -182,6 +182,9 @@ public abstract class AbstractWheelView extends AbstractWheel {
      */
     @Override
     protected void recreateAssets(int width, int height) {
+    	if (mSpinBitmap != null) mSpinBitmap.recycle();
+    	if (mSeparatorsBitmap != null) mSeparatorsBitmap.recycle();
+    	
         mSpinBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         mSeparatorsBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         setSelectorPaintCoeff(0);
