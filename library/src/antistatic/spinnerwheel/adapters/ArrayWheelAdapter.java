@@ -46,6 +46,11 @@ public class ArrayWheelAdapter<T> extends AbstractWheelTextAdapter {
         this.items = items;
     }
     
+    public void setItems(T items[]) {
+    	this.items = items;
+    	notifyDataInvalidatedEvent();
+    }
+    
     @Override
     public CharSequence getItemText(int index) {
         if (index >= 0 && index < items.length) {

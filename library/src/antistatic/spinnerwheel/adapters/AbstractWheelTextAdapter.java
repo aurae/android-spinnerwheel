@@ -238,14 +238,15 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
         if (itemResourceId == TEXT_VIEW_ITEM_RESOURCE) {
             view.setTextColor(textColor);
             view.setGravity(Gravity.CENTER);
-            view.setTextSize(textSize);
+//            view.setTextSize(textSize);
             view.setLines(1);
         }
         if (textTypeface != null) {
             view.setTypeface(textTypeface);
-        } else {
-            view.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
         }
+//        else {
+//            view.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+//        }
     }
     
     /**
@@ -254,7 +255,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
      * @param textResource the text resource Id in layout
      * @return the loaded text view
      */
-    private TextView getTextView(View view, int textResource) {
+    protected TextView getTextView(View view, int textResource) {
         TextView text = null;
         try {
             if (textResource == NO_RESOURCE && view instanceof TextView) {
@@ -276,7 +277,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
      * @param resource the resource Id
      * @return the loaded view or null if resource is not set
      */
-    private View getView(int resource, ViewGroup parent) {
+    protected View getView(int resource, ViewGroup parent) {
         switch (resource) {
         case NO_RESOURCE:
             return null;
