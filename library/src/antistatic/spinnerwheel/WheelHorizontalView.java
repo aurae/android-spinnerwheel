@@ -47,7 +47,7 @@ public class WheelHorizontalView extends AbstractWheelView {
 	private static int itemID = -1;
 
 	@SuppressWarnings("unused")
-	private final String LOG_TAG = WheelVerticalView.class.getName() + " #" + (++itemID);
+	private final String LOG_TAG = WheelHorizontalView.class.getName() + " #" + (++itemID);
 
 	/**
 	 * The width of the selection divider.
@@ -209,15 +209,6 @@ public class WheelHorizontalView extends AbstractWheelView {
 	protected void onScrollTouchedUp() {
 		super.onScrollTouchedUp();
 		int cnt = mItemsLayout.getChildCount();
-		View itm;
-		Log.e(LOG_TAG, " ----- layout: " + mItemsLayout.getMeasuredWidth() + mItemsLayout.getMeasuredHeight());
-		Log.e(LOG_TAG, " -------- dumping " + cnt + " items");
-		for (int i = 0; i < cnt; i++) {
-			itm = mItemsLayout.getChildAt(i);
-			Log.e(LOG_TAG, " item #" + i + ": " + itm.getWidth() + "x" + itm.getHeight());
-			itm.forceLayout(); // forcing layout without re-rendering parent
-		}
-		Log.e(LOG_TAG, " ---------- dumping finished ");
 	}
 
 	// --------------------------------------------------------------------------
